@@ -2,6 +2,7 @@
 
 class ContactsController < ApplicationController
   before_action :find_contact, except: [:index, :create]
+
   def index
     @contacts = Contact.all
     render json: @contacts

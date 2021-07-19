@@ -1,13 +1,14 @@
 <template>
   <div id="app">
     <v-app>
-      <contact/>
+      <navbar></navbar>
+    <router-view></router-view>
     </v-app>
   </div>
 </template>
 
 <script>
-import contact from "./packs/components/contact.vue";
+import navbar from "./packs/components/navbar";
 export default {
   data: function() {
     return {
@@ -15,7 +16,7 @@ export default {
     };
   },
   components: {
-    contact: contact
+    navbar: navbar
   }
 };
 </script>

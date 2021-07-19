@@ -93,9 +93,9 @@
       </v-toolbar>
     </template>
     <template v-slot:[`item.action`]="{ item }">
-      <v-icon small class="mr-2" @click="showItem(item)">show</v-icon>
+      <v-icon small class="mr-2" @click="getContact(item)">show</v-icon>
       <v-icon small class="mr-2" @click="editItem(item)">edit</v-icon>
-      <v-icon small @click="getContact(item)">delete</v-icon>
+      <v-icon small @click="deleteItem(item)">delete</v-icon>
       <v-icon small class="mr-2" @click="showChanges(item)">changes</v-icon>
     </template>
     <template v-slot:no-data>
