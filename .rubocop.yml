@@ -1,0 +1,126 @@
+require: rubocop-rails
+
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+    - 'db/migrate/*'
+    - 'db/seeds.rb'
+    - 'db/seeds/*.rb'
+    - 'doc/**/*'
+    - 'bin/*'
+    - 'config/*'
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - '**/.DS_Store'
+    - 'app/views/**/*'
+    - 'app/assets/**/*'
+    - 'app/javascript/**/*'
+  Include:
+    - 'config/initializers/*'
+    - 'app/**/*'
+
+Rails:
+  Enabled: true
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/OutputSafety:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
+
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - staging
+    - test
+
+Rails/TimeZone:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/BlockLength:
+  Max: 121
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/ModuleLength:
+  Max: 200
+
+Style/Documentation:
+  Enabled: false
+
+Style/DateTime:
+  Enabled: false
+
+Style/MethodDefParentheses:
+  Enabled: true
+
+Style/WordArray:
+  EnforcedStyle: percent
+  MinSize: 10
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Style/EmptyMethod:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false
+
+Style/NumericLiteralPrefix:
+  Exclude:
+    - 'spec/**/*'
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Layout/IndentationConsistency:
+  EnforcedStyle: indented_internal_methods
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 200
+
+Metrics/AbcSize:
+  Max: 56
+
+Metrics/ClassLength:
+  Max: 256
+
+Metrics/CyclomaticComplexity:
+  Max: 12
+
+Metrics/MethodLength:
+  Max: 70
+
+Metrics/PerceivedComplexity:
+  Max: 13
+
+Naming/PredicateName:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false
+
+Naming/RescuedExceptionsVariableName:
+  Enabled: false
