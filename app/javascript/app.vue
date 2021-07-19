@@ -1,17 +1,23 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
+    <v-app>
+      <contact/>
+    </v-app>
   </div>
 </template>
 
 <script>
+import contact from "./packs/components/contact.vue";
 export default {
-  data: function () {
+  data: function() {
     return {
       message: "Hello Vue!"
-    }
+    };
+  },
+  components: {
+    contact: contact
   }
-}
+};
 </script>
 
 <style scoped>
