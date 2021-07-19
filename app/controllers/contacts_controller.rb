@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ContactsController < ApplicationController
+  before_action :find_contact, except: [:index, :create]
   def index
     @contacts = Contact.all
     render json: @contacts
@@ -16,12 +17,10 @@ class ContactsController < ApplicationController
   end
 
   def show
-    @contact = Contact.find(params[:id])
     render json: { data: @contact, status: :ok, message: 'Success' }
   end
 
   def update
-    @contact = Contact.find(params[:id])
     if @contact.update(contact_params)
       render json: { status: :ok, message: 'Success' }
     else
@@ -30,7 +29,6 @@ class ContactsController < ApplicationController
   end
 
   def destroy
-    @contact = Contact.find(params[:id])
     if @contact.destroy
       render json: { json: 'Contact was successfully deleted.' }
     else
@@ -38,9 +36,19 @@ class ContactsController < ApplicationController
     end
   end
 
+  def versions
+    versions = @contact.versions.map(&:changeset)
+
+    render json: { data: versions, status: :ok, message: 'Success' }
+  end
+
   private
 
     def contact_params
       params.require(:contact).permit(:id, :first_name, :last_name, :email, :phone_number)
+    end
+
+    def find_contact
+      @contact = Contact.find(params[:id])
     end
 end
