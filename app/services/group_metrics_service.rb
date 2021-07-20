@@ -7,8 +7,6 @@ class GroupMetricsService
   end
 
   def group
-    return unless @metrics
-
     @metrics = case @average_type
                when 'minute'
                  group_by_minute
@@ -19,6 +17,9 @@ class GroupMetricsService
                end
 
     @metrics
+  rescue StandardError => error
+    Rails.logger(error)
+    nil
   end
 
   def group_by_day

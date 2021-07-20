@@ -8,35 +8,35 @@ class MetricsController < ApplicationController
 
     @metrics = metrics_in_interval if params[:from_date] && params[:to_date]
 
-    render json: @metrics
+    render json: @metrics, each_serializer: Metric::ListSerializer
   end
 
   def create
     @metric = Metric.new(metric_params)
     if @metric.save
-      render json: { status: :ok, message: 'Success' }
+      render json: @metric, serializer: Metric::ObjectSerializer
     else
-      render json: { json: @metric.errors }, status: :unprocessable_entity
+      render json: { errors: @metric.errors }, status: :unprocessable_entity
     end
   end
 
   def show
-    render json: { data: @metric, status: :ok, message: 'Success' }
+    render json: @metric, serializer: Metric::ObjectSerializer
   end
 
   def update
     if @metric.update(metric_params)
-      render json: { status: :ok, message: 'Success' }
+      render json: @metric, serializer: Metric::ObjectSerializer
     else
-      render json: { json: @metric.error, status: :unprocessable_entity }
+      render json: { errors: @metric.errors }, status: :unprocessable_entity
     end
   end
 
   def destroy
     if @metric.destroy
-      render json: { json: 'Metric was successfully deleted.' }
+      render json: { message: 'Metric was successfully deleted.' }
     else
-      render json: { json: @metric.errors, status: :unprocessable_entity }
+      render json: { errors: @metric.errors, status: :unprocessable_entity }
     end
   end
 
@@ -64,5 +64,8 @@ class MetricsController < ApplicationController
 
     def metrics_in_interval
       @metrics.in_interval(params[:from_date], params[:to_date])
+    rescue ArgumentError => error
+      Rails.logger(error)
+      []
     end
 end

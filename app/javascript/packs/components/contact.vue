@@ -181,9 +181,7 @@ export default {
         axios
         .delete(`http://localhost:3000/contacts/${item.id}`)
         .then(response => {
-          console.log(response);
-          console.log(response.data.json);
-          alert(response.data.json);
+          alert(response.data.message);
           this.initialize();
         })
         .catch(error => {
@@ -236,8 +234,6 @@ export default {
             contact: this.editedItem
           })
           .then(response => {
-            console.log(response);
-            console.log("Created!");
             this.initialize();
             this.contacts.push(this.editedItem);
           })
@@ -252,8 +248,8 @@ export default {
       axios
         .get(`http://localhost:3000/contacts/${item.id}`)
         .then(response => {
-            this.editedIndex = response.data.data.id;
-            this.editedItem = Object.assign({}, response.data.data);
+            this.editedIndex = response.data.id;
+            this.editedItem = Object.assign({}, response.data);
             this.showDialog = true;
         })
         .catch(error => {

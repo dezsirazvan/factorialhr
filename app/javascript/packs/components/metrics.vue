@@ -46,7 +46,7 @@
         <v-btn color="primary" @click="initialize">Reset</v-btn>
       </template>
     </v-data-table>
-    <h2 class="mt-5 ml-12"> Timeline </h2>
+    <h1 class="mt-5 ml-12"> Timeline </h1>
     <v-select class="mt-5" :items="averageTypes" v-model="averageType" label="Day/Minute/Second Timeline"></v-select>
     <timeline class="mt-5" v-for="(item, i) in timelines" :key="i">
       <timeline-title> Average per {{averageType}} in {{ item.date }} is: {{ item.average }}</timeline-title>
@@ -146,9 +146,7 @@
           axios
             .delete(`http://localhost:3000/metrics/${item.id}`)
             .then(response => {
-              console.log(response);
-              console.log(response.data.json);
-              alert(response.data.json);
+              alert(response.data.message);
               this.initialize(null, null);
             })
             .catch(error => {

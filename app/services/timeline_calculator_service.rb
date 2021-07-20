@@ -18,6 +18,9 @@ class TimelineCalculatorService
     end
 
     final_result
+  rescue StandardError => error
+    Rails.logger(error)
+    []
   end
 
   def result_object(key, average, value)

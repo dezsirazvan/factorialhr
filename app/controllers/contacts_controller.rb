@@ -5,35 +5,36 @@ class ContactsController < ApplicationController
 
   def index
     @contacts = Contact.all
-    render json: @contacts
+
+    render json: @contacts, each_serializer: Contact::ListSerializer
   end
 
   def create
     @contact = Contact.new(contact_params)
     if @contact.save
-      render json: { status: :ok, message: 'Success' }
+      render json: @contact, serializer: Contact::ObjectSerializer
     else
-      render json: { json: @contact.errors }, status: :unprocessable_entity
+      render json: { errors: @contact.errors }, status: :unprocessable_entity
     end
   end
 
   def show
-    render json: { data: @contact, status: :ok, message: 'Success' }
+    render json: @contact, serializer: Contact::ObjectSerializer
   end
 
   def update
     if @contact.update(contact_params)
-      render json: { status: :ok, message: 'Success' }
+      render json: @contact, serializer: Contact::ObjectSerializer
     else
-      render json: { json: @contact.error, status: :unprocessable_entity }
+      render json: { errors: @contact.error, status: :unprocessable_entity }
     end
   end
 
   def destroy
     if @contact.destroy
-      render json: { json: 'Contact was successfully deleted.' }
+      render json: { message: 'Contact was successfully deleted.' }
     else
-      render json: { json: @contact.errors, status: :unprocessable_entity }
+      render json: { errors: @contact.errors, status: :unprocessable_entity }
     end
   end
 
