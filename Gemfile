@@ -29,6 +29,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rack-cors'
 
+# Group date gem
+gem 'groupdate'
+
 # Track changes
 gem 'paper_trail'
 

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   end
 
   resources :metrics do
+    get :timeline, on: :collection
   end
 
   get 'welcome/index'

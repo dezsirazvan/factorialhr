@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 class MetricsController < ApplicationController
-  before_action :find_metric, except: [:index, :create]
+  before_action :find_metric, except: [:index, :create, :timeline]
 
   def index
     @metrics = Metric.all
+
+    @metrics = metrics_in_interval if params[:from_date] && params[:to_date]
+
     render json: @metrics
   end
 
@@ -37,6 +40,18 @@ class MetricsController < ApplicationController
     end
   end
 
+  def timeline
+    @metrics = Metric.all
+
+    @metrics = metrics_in_interval if params[:from_date] && params[:to_date]
+
+    @metrics = GroupMetricsService.new(@metrics, params[:average_type]).group
+
+    result = TimelineCalculatorService.new(@metrics).calculate
+
+    render json: result
+  end
+
   private
 
     def metric_params
@@ -45,5 +60,9 @@ class MetricsController < ApplicationController
 
     def find_metric
       @metric = Metric.find(params[:id])
+    end
+
+    def metrics_in_interval
+      @metrics.in_interval(params[:from_date], params[:to_date])
     end
 end

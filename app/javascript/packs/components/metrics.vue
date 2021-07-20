@@ -1,60 +1,78 @@
 <template>
-  <v-data-table :headers="headers" :items="metrics" class="elevation-1">
-    <template v-slot:top>
-      <v-toolbar flat color="white">
-        <v-toolbar-title>Metrics</v-toolbar-title>
-        <v-divider class="mx-4" inset vertical></v-divider>
-        <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
-          <template v-slot:activator="{ on }">
-            <v-btn color="primary" dark class="mb-1 mr-2" v-on="on">New Metric</v-btn>
-            <date-picker v-model="selectedTime" class="mr-5" valueType="format" range></date-picker>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="headline">{{ formTitle }}</span>
-            </v-card-title>
+  <div>
+    <v-data-table :headers="headers" :items="metrics" class="elevation-1">
+      <template v-slot:top>
+        <v-toolbar flat color="white">
+          <v-toolbar-title>Metrics</v-toolbar-title>
+          <v-divider class="mx-4" inset vertical></v-divider>
+          <v-spacer></v-spacer>
+          <v-dialog v-model="dialog" max-width="500px">
+            <template v-slot:activator="{ on }">
+              <v-btn color="primary" dark class="mb-1 mr-2" v-on="on">New Metric</v-btn>
+              <date-picker v-model="selectedTime" class="mr-5" valueType="format" range></date-picker>
+            </template>
+            <v-card>
+              <v-card-title>
+                <span class="headline">{{ formTitle }}</span>
+              </v-card-title>
 
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.value" label="Value"></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field v-model="editedItem.value" label="Value"></v-text-field>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
 
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="save(editedItem)">Save</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </v-toolbar>
-    </template>
-    <template v-slot:[`item.action`]="{ item }">
-      <v-icon small class="mr-2" @click="editItem(item)">edit</v-icon>
-      <v-icon small @click="deleteItem(item)">delete</v-icon>
-    </template>
-    <template v-slot:no-data>
-      <v-btn color="primary" @click="initialize">Reset</v-btn>
-    </template>
-  </v-data-table>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+                <v-btn color="blue darken-1" text @click="save(editedItem)">Save</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-toolbar>
+      </template>
+      <template v-slot:[`item.action`]="{ item }">
+        <v-icon small class="mr-2" @click="editItem(item)">edit</v-icon>
+        <v-icon small @click="deleteItem(item)">delete</v-icon>
+      </template>
+      <template v-slot:no-data>
+        <v-btn color="primary" @click="initialize">Reset</v-btn>
+      </template>
+    </v-data-table>
+    <h2 class="mt-5 ml-12"> Timeline </h2>
+    <v-select class="mt-5" :items="averageTypes" v-model="averageType" label="Day/Minute/Second Timeline"></v-select>
+    <timeline class="mt-5" v-for="(item, i) in timelines" :key="i">
+      <timeline-title> Average per {{averageType}} in {{ item.date }} is: {{ item.average }}</timeline-title>
+      <v-list-item v-for="(item, i) in item.metrics" :key="i">
+          <timeline-item bg-color="#9dd8e0">{{item}}</timeline-item>
+      </v-list-item>
+    </timeline>
+  </div>
 </template>
 
 <script>
   import axios from "axios";
   import DatePicker from 'vue2-datepicker';
   import 'vue2-datepicker/index.css';
-
+  import { Timeline, TimelineItem, TimelineTitle } from 'vue-cute-timeline'
   export default {
-    components: { DatePicker },
+    components: { 
+      DatePicker, 
+      Timeline,
+      TimelineItem,
+      TimelineTitle 
+    },
     data: () => ({
+      timelines: [],
+      averageTypes: ['day', 'minute', 'second'],
+      averageType: 'day',
       selectedTime: null,
       dialog: false,
       headers: [
@@ -92,6 +110,9 @@
       },
       selectedTime(val) {
         this.initialize(val[0], val[1])
+      },
+      averageType(val) {
+        this.getTimeline()
       }
     },
 
@@ -100,10 +121,10 @@
     },
 
     methods: {
-      initialize(from_date, to_date) {
+      initialize(fromDate, toDate) {
         return axios
           .get("http://localhost:3000/metrics",
-          { params: { from_date: from_date, to_date: to_date } })
+          { params: { from_date: fromDate, to_date: toDate } })
           .then(response => {
             console.log(response.data);
             this.metrics = response.data;
@@ -190,7 +211,33 @@
           .catch(error => {
             console.log(error);
           });
+      },
+
+      getTimeline() {
+        var fromDate = null;
+        var toDate = null;
+        
+        if (this.selectedTime !== null){
+          fromDate = this.selectedTime[0],
+          toDate = this.selectedTime[1]
+        }
+
+        axios
+          .get("http://localhost:3000/metrics/timeline", { params: { from_date: fromDate, to_date: toDate, average_type: this.averageType } })
+          .then(response => {
+            this.timelines = response.data;
+          })
+          .catch(error => {
+            console.log(error);
+          });
       }
     }
   };
 </script>
+
+<style scoped>
+  .v-select{
+      max-width: 200px;
+      margin-left: 50px
+  }
+</style>
