@@ -179,7 +179,7 @@
               this.initialize(null, null);
             })
             .catch(error => {
-              console.log(error);
+              alert(error.message);
             });
         } else {
           console.log(item);
@@ -188,14 +188,12 @@
               metric: this.editedItem
             })
             .then(response => {
-              console.log(response);
-              console.log("Created!");
               this.initialize(null, null);
+              this.metrics.push(this.editedItem);
             })
             .catch(error => {
-              console.log(error);
+              alert(error.message);
             });
-          this.metrics.push(this.editedItem);
         }
         this.close();
       },
