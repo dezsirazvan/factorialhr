@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
-  resources :contacts do
-    get :versions, on: :member
-  end
+  apipie
+  namespace :api do 
+    namespace :v1 do 
+      resources :contacts do
+        get :versions, on: :member
+      end
 
-  resources :metrics do
-    get :timeline, on: :collection
+      resources :metrics do
+        get :timeline, on: :collection
+      end
+    end
   end
 
   get 'welcome/index'

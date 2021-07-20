@@ -109,6 +109,7 @@ import axios from "axios";
 
 export default {
   data: () => ({
+    baseUrl: "http://localhost:3000/api/v1",
     showDialog: false,
     showChangesDialog: false,
     changesHistory: [],
@@ -160,7 +161,7 @@ export default {
   methods: {
     initialize() {
       return axios
-        .get("http://localhost:3000/contacts")
+        .get(`${this.baseUrl}/contacts`)
         .then(response => {
           console.log(response.data);
           this.contacts = response.data;
@@ -179,7 +180,7 @@ export default {
       const index = this.contacts.indexOf(item);
       if(confirm("Are you sure you want to delete this item?")) {
         axios
-        .delete(`http://localhost:3000/contacts/${item.id}`)
+        .delete(`${this.baseUrl}/contacts/${item.id}`)
         .then(response => {
           alert(response.data.message);
           this.initialize();
@@ -213,7 +214,7 @@ export default {
     save(item) {
       if (this.editedIndex > -1) {
         axios
-          .put(`http://localhost:3000/contacts/${item.id}`, {
+          .put(`${this.baseUrl}/contacts/${item.id}`, {
             id: this.editedItem.id,
             first_name: this.editedItem.first_name,
             last_name: this.editedItem.last_name,
@@ -230,7 +231,7 @@ export default {
       } else {
         console.log(item);
         axios
-          .post(`http://localhost:3000/contacts/`, {
+          .post(`${this.baseUrl}/contacts/`, {
             contact: this.editedItem
           })
           .then(response => {
@@ -246,7 +247,7 @@ export default {
 
     getContact(item) {
       axios
-        .get(`http://localhost:3000/contacts/${item.id}`)
+        .get(`${this.baseUrl}/contacts/${item.id}`)
         .then(response => {
             this.editedIndex = response.data.id;
             this.editedItem = Object.assign({}, response.data);
@@ -258,7 +259,7 @@ export default {
     },
     showChanges(item) {
       axios
-        .get(`http://localhost:3000/contacts/${item.id}/versions`)
+        .get(`${this.baseUrl}/contacts/${item.id}/versions`)
         .then(response => {
           this.showChangesDialog = true;
            this.changesHistory = response.data.data;

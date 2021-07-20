@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class MetricsController < ApplicationController
+class Api::V1::MetricsController < ApplicationController
   before_action :find_metric, except: [:index, :create, :timeline]
 
   def index

@@ -75,6 +75,7 @@
       averageType: 'day',
       selectedTime: null,
       dialog: false,
+      baseUrl: "http://localhost:3000/api/v1",
       headers: [
         {
           text: "Name",
@@ -123,7 +124,7 @@
     methods: {
       initialize(fromDate, toDate) {
         return axios
-          .get("http://localhost:3000/metrics",
+          .get(`${this.baseUrl}/metrics`,
           { params: { from_date: fromDate, to_date: toDate } })
           .then(response => {
             console.log(response.data);
@@ -144,7 +145,7 @@
         const index = this.metrics.indexOf(item);
         if (confirm("Are you sure you want to delete this item?")) {
           axios
-            .delete(`http://localhost:3000/metrics/${item.id}`)
+            .delete(`${this.baseUrl}/metrics/${item.id}`)
             .then(response => {
               alert(response.data.message);
               this.initialize(null, null);
@@ -169,7 +170,7 @@
       save(item) {
         if (this.editedIndex > -1) {
           axios
-            .put(`http://localhost:3000/metrics/${item.id}`, {
+            .put(`${this.baseUrl}/metrics/${item.id}`, {
               id: this.editedItem.id,
               name: this.editedItem.name,
               value: this.editedItem.value
@@ -184,7 +185,7 @@
         } else {
           console.log(item);
           axios
-            .post(`http://localhost:3000/metrics/`, {
+            .post(`${this.baseUrl}/metrics/`, {
               metric: this.editedItem
             })
             .then(response => {
@@ -200,7 +201,7 @@
 
       getMetric(item) {
         axios
-          .get(`http://localhost:3000/${item.id}`)
+          .get(`${this.baseUrl}/metrics/${item.id}`)
           .then(response => {
             this.metric = response.data;
           })
@@ -219,7 +220,7 @@
         }
 
         axios
-          .get("http://localhost:3000/metrics/timeline", { params: { from_date: fromDate, to_date: toDate, average_type: this.averageType } })
+          .get(`${this.baseUrl}/metrics/timeline`, { params: { from_date: fromDate, to_date: toDate, average_type: this.averageType } })
           .then(response => {
             this.timelines = response.data;
           })

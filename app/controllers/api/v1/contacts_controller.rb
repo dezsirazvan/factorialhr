@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-class ContactsController < ApplicationController
+class Api::V1::ContactsController < ApplicationController
+  include Api::V1::ContactsControllerDoc
+
   before_action :find_contact, except: [:index, :create]
 
   def index
