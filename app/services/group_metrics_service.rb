@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class GroupMetricsService
+  attr_reader :metrics, :average_type
+
   def initialize(metrics, average_type)
     @metrics = metrics
     @average_type = average_type

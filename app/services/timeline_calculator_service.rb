@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 class TimelineCalculatorService
+  attr_reader :metrics_grouped
+
   def initialize(metrics_grouped)
     @metrics_grouped = metrics_grouped
   end
 
   def calculate
     final_result = []
-
-    return unless @metrics_grouped
 
     @metrics_grouped.each do |key, value|
       values = values_array(value)

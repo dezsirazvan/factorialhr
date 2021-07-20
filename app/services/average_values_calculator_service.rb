@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AverageValuesCalculatorService
+  attr_reader :values_array
+
   def initialize(values_array)
     @values_array = values_array
   end
