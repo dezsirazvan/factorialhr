@@ -1,5 +1,5 @@
 <template>
-  <v-data-table :headers="headers" :items="metrics" sort-by="calories" class="elevation-1">
+  <v-data-table :headers="headers" :items="metrics" class="elevation-1">
     <template v-slot:top>
       <v-toolbar flat color="white">
         <v-toolbar-title>Metrics</v-toolbar-title>
@@ -7,7 +7,8 @@
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on }">
-            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+            <v-btn color="primary" dark class="mb-1 mr-2" v-on="on">New Metric</v-btn>
+            <date-picker v-model="selectedTime" class="mr-5" valueType="format" range></date-picker>
           </template>
           <v-card>
             <v-card-title>
@@ -47,140 +48,149 @@
 </template>
 
 <script>
-import axios from "axios";
+  import axios from "axios";
+  import DatePicker from 'vue2-datepicker';
+  import 'vue2-datepicker/index.css';
 
-export default {
-  data: () => ({
-    dialog: false,
-    headers: [
-      {
-        text: "Name",
-        align: "left",
-        sortable: false,
-        value: "name"
+  export default {
+    components: { DatePicker },
+    data: () => ({
+      selectedTime: null,
+      dialog: false,
+      headers: [
+        {
+          text: "Name",
+          align: "left",
+          sortable: false,
+          value: "name"
+        },
+        { text: "Value", value: "value" },
+        { text: "Created_at", value: "created_at" },
+        { text: "Actions", value: "action", sortable: false }
+      ],
+      metrics: [],
+      editedIndex: -1,
+      editedItem: {
+        name: "",
+        value: 0
       },
-      { text: "Value", value: "value" },
-      { text: "Actions", value: "action", sortable: false }
-    ],
-    metrics: [],
-    editedIndex: -1,
-    editedItem: {
-      name: "",
-      value: 0
-    },
-    defaultItem: {
-      name: "",
-      value: 0
-    }
-  }),
-
-  computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
-    }
-  },
-
-  watch: {
-    dialog(val) {
-      val || this.close();
-    }
-  },
-
-  created() {
-    this.initialize();
-  },
-
-  methods: {
-    initialize() {
-      return axios
-        .get("http://localhost:3000/metrics")
-        .then(response => {
-          console.log(response.data);
-          this.metrics = response.data;
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    },
-
-    editItem(item) {
-      this.editedIndex = item.id;
-      this.editedItem = Object.assign({}, item);
-      this.dialog = true;
-    },
-
-    deleteItem(item) {
-      const index = this.metrics.indexOf(item);
-      if (confirm("Are you sure you want to delete this item?")) {
-        axios
-          .delete(`http://localhost:3000/metrics/${item.id}`)
-          .then(response => {
-            console.log(response);
-            console.log(response.data.json);
-            alert(response.data.json);
-            this.initialize();
-          })
-          .catch(error => {
-            console.log(error);
-          });
-        this.metrics.splice(index, 1);
-        } else {
-          return
-        }
-    },
-
-    close() {
-      this.dialog = false;
-      setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
-        this.editedIndex = -1;
-      }, 300);
-    },
-
-    save(item) {
-      if (this.editedIndex > -1) {
-        axios
-          .put(`http://localhost:3000/metrics/${item.id}`, {
-            id: this.editedItem.id,
-            name: this.editedItem.name,
-            value: this.editedItem.value
-          })
-          .then(response => {
-            console.log(response);
-            this.initialize();
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      } else {
-        console.log(item);
-        axios
-          .post(`http://localhost:3000/metrics/`, {
-            metric: this.editedItem
-          })
-          .then(response => {
-            console.log(response);
-            console.log("Created!");
-            this.initialize();
-          })
-          .catch(error => {
-            console.log(error);
-          });
-        this.metrics.push(this.editedItem);
+      defaultItem: {
+        name: "",
+        value: 0
       }
-      this.close();
+    }),
+
+    computed: {
+      formTitle() {
+        return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      }
     },
 
-    getMetric(item) {
-      axios
-        .get(`http://localhost:3000/${item.id}`)
-        .then(response => {
-          this.metric = response.data;
-        })
-        .catch(error => {
-          console.log(error);
-        });
+    watch: {
+      dialog(val) {
+        val || this.close();
+      },
+      selectedTime(val) {
+        this.initialize(val[0], val[1])
+      }
+    },
+
+    created() {
+      this.initialize(null, null);
+    },
+
+    methods: {
+      initialize(from_date, to_date) {
+        return axios
+          .get("http://localhost:3000/metrics",
+          { params: { from_date: from_date, to_date: to_date } })
+          .then(response => {
+            console.log(response.data);
+            this.metrics = response.data;
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      },
+
+      editItem(item) {
+        this.editedIndex = item.id;
+        this.editedItem = Object.assign({}, item);
+        this.dialog = true;
+      },
+
+      deleteItem(item) {
+        const index = this.metrics.indexOf(item);
+        if (confirm("Are you sure you want to delete this item?")) {
+          axios
+            .delete(`http://localhost:3000/metrics/${item.id}`)
+            .then(response => {
+              console.log(response);
+              console.log(response.data.json);
+              alert(response.data.json);
+              this.initialize(null, null);
+            })
+            .catch(error => {
+              console.log(error);
+            });
+          this.metrics.splice(index, 1);
+          } else {
+            return
+          }
+      },
+
+      close() {
+        this.dialog = false;
+        setTimeout(() => {
+          this.editedItem = Object.assign({}, this.defaultItem);
+          this.editedIndex = -1;
+        }, 300);
+      },
+
+      save(item) {
+        if (this.editedIndex > -1) {
+          axios
+            .put(`http://localhost:3000/metrics/${item.id}`, {
+              id: this.editedItem.id,
+              name: this.editedItem.name,
+              value: this.editedItem.value
+            })
+            .then(response => {
+              console.log(response);
+              this.initialize(null, null);
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        } else {
+          console.log(item);
+          axios
+            .post(`http://localhost:3000/metrics/`, {
+              metric: this.editedItem
+            })
+            .then(response => {
+              console.log(response);
+              console.log("Created!");
+              this.initialize(null, null);
+            })
+            .catch(error => {
+              console.log(error);
+            });
+          this.metrics.push(this.editedItem);
+        }
+        this.close();
+      },
+
+      getMetric(item) {
+        axios
+          .get(`http://localhost:3000/${item.id}`)
+          .then(response => {
+            this.metric = response.data;
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
     }
-  }
-};
+  };
 </script>
