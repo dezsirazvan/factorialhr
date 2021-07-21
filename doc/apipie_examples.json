@@ -1,4 +1,136 @@
 {
+  "contacts#create": [
+    {
+      "verb": "POST",
+      "path": "/api/v1/contacts",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": {
+        "contact": {
+          "first_name": "Test",
+          "last_name": "Test Last Name",
+          "email": "test@test.com",
+          "phone_number": "+34567789123"
+        }
+      },
+      "response_data": {
+        "id": 611,
+        "first_name": "Test",
+        "last_name": "Test Last Name",
+        "email": "test@test.com",
+        "phone_number": "+34567789123",
+        "created_at": "2021-07-21T11:13:43.458Z"
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "POST",
+      "path": "/api/v1/contacts",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": {
+        "contact": {
+          "first_name": "test"
+        }
+      },
+      "response_data": {
+        "errors": {
+          "phone_number": [
+            "can't be blank"
+          ],
+          "last_name": [
+            "can't be blank"
+          ],
+          "email": [
+            "can't be blank"
+          ]
+        }
+      },
+      "code": 422,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "POST",
+      "path": "/api/v1/contacts",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": {
+        "contact": {
+          "first_name": "Test",
+          "last_name": "Test Last Name",
+          "email": "test@test.com",
+          "phone_number": "+34567789123"
+        }
+      },
+      "response_data": {
+        "id": 616,
+        "first_name": "Test",
+        "last_name": "Test Last Name",
+        "email": "test@test.com",
+        "phone_number": "+34567789123",
+        "created_at": "2021-07-21T11:13:43.511Z"
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    }
+  ],
+  "contacts#destroy": [
+    {
+      "verb": "DELETE",
+      "path": "/api/v1/contacts/623",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": {
+        "message": "Contact was successfully deleted."
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "DELETE",
+      "path": "/api/v1/contacts/test",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": {
+        "error": "Contact not found"
+      },
+      "code": 404,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "DELETE",
+      "path": "/api/v1/contacts/627",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": {
+        "message": "Contact was successfully deleted."
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    }
+  ],
   "contacts#index": [
     {
       "verb": "GET",
@@ -10,20 +142,20 @@
       "request_data": null,
       "response_data": [
         {
-          "id": 41,
-          "first_name": "Barbra",
-          "last_name": "Sipes",
-          "email": "xavierdare@blickhansen.net",
-          "phone_number": "+344950108002",
-          "created_at": "2021-07-20T22:43:37.048Z"
+          "id": 605,
+          "first_name": "Arthur",
+          "last_name": "Wuckert",
+          "email": "rubin@herman.co",
+          "phone_number": "+348662237425",
+          "created_at": "2021-07-21T11:13:43.378Z"
         },
         {
-          "id": 42,
-          "first_name": "Alfonso",
-          "last_name": "Heller",
-          "email": "vanita@thiel.com",
-          "phone_number": "+343433469491",
-          "created_at": "2021-07-20T22:43:37.081Z"
+          "id": 606,
+          "first_name": "Virgil",
+          "last_name": "Barrows",
+          "email": "elmochamplin@bode.net",
+          "phone_number": "+349827492773",
+          "created_at": "2021-07-21T11:13:43.387Z"
         }
       ],
       "code": 200,
@@ -40,22 +172,675 @@
       "request_data": null,
       "response_data": [
         {
-          "id": 43,
-          "first_name": "Weston",
-          "last_name": "Prohaska",
-          "email": "oswaldobergstrom@abernathy.org",
-          "phone_number": "+343788175440",
-          "created_at": "2021-07-20T22:43:37.151Z"
+          "id": 607,
+          "first_name": "Joseph",
+          "last_name": "Morar",
+          "email": "roxanegrady@hintzjenkins.co",
+          "phone_number": "+345711993293",
+          "created_at": "2021-07-21T11:13:43.411Z"
         },
         {
-          "id": 44,
-          "first_name": "Zack",
-          "last_name": "Feil",
-          "email": "donnetta@king.net",
-          "phone_number": "+343851569866",
-          "created_at": "2021-07-20T22:43:37.157Z"
+          "id": 608,
+          "first_name": "Hung",
+          "last_name": "Lockman",
+          "email": "stanford@gleasonkilback.io",
+          "phone_number": "+345835834025",
+          "created_at": "2021-07-21T11:13:43.416Z"
         }
       ],
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    }
+  ],
+  "contacts#show": [
+    {
+      "verb": "GET",
+      "path": "/api/v1/contacts/599",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": {
+        "id": 599,
+        "first_name": "Ranae",
+        "last_name": "Prosacco",
+        "email": "bill@beier.name",
+        "phone_number": "+349512839180",
+        "created_at": "2021-07-21T11:13:43.225Z"
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "GET",
+      "path": "/api/v1/contacts/test",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": {
+        "error": "Contact not found"
+      },
+      "code": 404,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "GET",
+      "path": "/api/v1/contacts/603",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": {
+        "id": 603,
+        "first_name": "Jeromy",
+        "last_name": "Ernser",
+        "email": "amoslehner@crist.org",
+        "phone_number": "+347979334212",
+        "created_at": "2021-07-21T11:13:43.346Z"
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    }
+  ],
+  "contacts#update": [
+    {
+      "verb": "PUT",
+      "path": "/api/v1/contacts/617",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": {
+        "contact": {
+          "first_name": "Updated"
+        }
+      },
+      "response_data": {
+        "id": 617,
+        "first_name": "Updated",
+        "last_name": "Trantow",
+        "email": "renae@millskerluke.co",
+        "phone_number": "+341823019482",
+        "created_at": "2021-07-21T11:13:43.519Z"
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "PUT",
+      "path": "/api/v1/contacts/test",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": {
+        "contact": {
+          "first_name": "test"
+        }
+      },
+      "response_data": {
+        "error": "Contact not found"
+      },
+      "code": 404,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "PUT",
+      "path": "/api/v1/contacts/621",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": {
+        "contact": {
+          "first_name": "Updated"
+        }
+      },
+      "response_data": {
+        "id": 621,
+        "first_name": "Updated",
+        "last_name": "Franecki",
+        "email": "benitoschultz@farrellgutmann.name",
+        "phone_number": "+341514780127",
+        "created_at": "2021-07-21T11:13:43.569Z"
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    }
+  ],
+  "contacts#versions": [
+    {
+      "verb": "GET",
+      "path": "/api/v1/contacts/629/versions",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": {
+        "data": [
+          {
+            "id": [
+              null,
+              629
+            ],
+            "first_name": [
+              null,
+              "Brenton"
+            ],
+            "last_name": [
+              null,
+              "Greenfelder"
+            ],
+            "email": [
+              null,
+              "shadbins@rippin.name"
+            ],
+            "phone_number": [
+              null,
+              "+349165934836"
+            ],
+            "created_at": [
+              null,
+              "2021-07-21T11:13:43.671Z"
+            ],
+            "updated_at": [
+              null,
+              "2021-07-21T11:13:43.671Z"
+            ]
+          }
+        ],
+        "status": "ok",
+        "message": "Success"
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "GET",
+      "path": "/api/v1/contacts/test/versions",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": {
+        "error": "Contact not found"
+      },
+      "code": 404,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "GET",
+      "path": "/api/v1/contacts/633/versions",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": {
+        "data": [
+          {
+            "id": [
+              null,
+              633
+            ],
+            "first_name": [
+              null,
+              "Dirk"
+            ],
+            "last_name": [
+              null,
+              "Robel"
+            ],
+            "email": [
+              null,
+              "enedina@walker.biz"
+            ],
+            "phone_number": [
+              null,
+              "+345769720973"
+            ],
+            "created_at": [
+              null,
+              "2021-07-21T11:13:43.720Z"
+            ],
+            "updated_at": [
+              null,
+              "2021-07-21T11:13:43.720Z"
+            ]
+          },
+          {
+            "first_name": [
+              "Dirk",
+              "Test Updated"
+            ],
+            "updated_at": [
+              "2021-07-21T11:13:43.720Z",
+              "2021-07-21T11:13:43.730Z"
+            ]
+          }
+        ],
+        "status": "ok",
+        "message": "Success"
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    }
+  ],
+  "metrics#create": [
+    {
+      "verb": "POST",
+      "path": "/api/v1/metrics",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": {
+        "metric": {
+          "name": "Test",
+          "value": 10
+        }
+      },
+      "response_data": {
+        "id": 733,
+        "name": "Test",
+        "value": 10,
+        "created_at": "2021-07-21T11:13:43.859Z"
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "POST",
+      "path": "/api/v1/metrics",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": {
+        "metric": {
+          "first_name": "test"
+        }
+      },
+      "response_data": {
+        "errors": {
+          "name": [
+            "can't be blank"
+          ],
+          "value": [
+            "can't be blank",
+            "is not a number"
+          ]
+        }
+      },
+      "code": 422,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "POST",
+      "path": "/api/v1/metrics",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": {
+        "metric": {
+          "name": "Test",
+          "value": 10
+        }
+      },
+      "response_data": {
+        "id": 738,
+        "name": "Test",
+        "value": 10,
+        "created_at": "2021-07-21T11:13:43.894Z"
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    }
+  ],
+  "metrics#destroy": [
+    {
+      "verb": "DELETE",
+      "path": "/api/v1/metrics/745",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": {
+        "message": "Metric was successfully deleted."
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "DELETE",
+      "path": "/api/v1/metrics/test",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": {
+        "error": "Metric not found"
+      },
+      "code": 404,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "DELETE",
+      "path": "/api/v1/metrics/749",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": {
+        "message": "Metric was successfully deleted."
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    }
+  ],
+  "metrics#index": [
+    {
+      "verb": "GET",
+      "path": "/api/v1/metrics",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": [
+        {
+          "id": 727,
+          "name": "Kesha",
+          "value": 611,
+          "created_at": "2021-07-21T11:13:43.806Z"
+        },
+        {
+          "id": 728,
+          "name": "Travis",
+          "value": 143,
+          "created_at": "2021-07-21T11:13:45.806Z"
+        }
+      ],
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "GET",
+      "path": "/api/v1/metrics",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": [
+        {
+          "id": 729,
+          "name": "Malia",
+          "value": 868,
+          "created_at": "2021-07-21T11:13:43.823Z"
+        },
+        {
+          "id": 730,
+          "name": "Charley",
+          "value": 979,
+          "created_at": "2021-07-21T11:13:45.823Z"
+        }
+      ],
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    }
+  ],
+  "metrics#show": [
+    {
+      "verb": "GET",
+      "path": "/api/v1/metrics/721",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": {
+        "id": 721,
+        "name": "Lashanda",
+        "value": 265,
+        "created_at": "2021-07-21T11:13:43.754Z"
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "GET",
+      "path": "/api/v1/metrics/test",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": {
+        "error": "Metric not found"
+      },
+      "code": 404,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "GET",
+      "path": "/api/v1/metrics/725",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": {
+        "id": 725,
+        "name": "Elwood",
+        "value": 955,
+        "created_at": "2021-07-21T11:13:43.790Z"
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    }
+  ],
+  "metrics#timeline": [
+    {
+      "verb": "GET",
+      "path": "/api/v1/metrics/timeline",
+      "versions": [
+        "1.0"
+      ],
+      "query": "average_type=day",
+      "request_data": null,
+      "response_data": [
+        {
+          "date": "2021-07-21",
+          "average": 117.5,
+          "metrics": [
+            {
+              "id": 751,
+              "name": "Vaughn",
+              "value": 81,
+              "created_at": "2021-07-21T11:13:44.000Z",
+              "updated_at": "2021-07-21T11:13:44.000Z"
+            },
+            {
+              "id": 752,
+              "name": "Jude",
+              "value": 154,
+              "created_at": "2021-07-21T11:13:46.000Z",
+              "updated_at": "2021-07-21T11:13:44.002Z"
+            }
+          ]
+        }
+      ],
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "GET",
+      "path": "/api/v1/metrics/timeline",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": [
+        {
+          "date": "2021-07-21",
+          "average": 904.0,
+          "metrics": [
+            {
+              "id": 753,
+              "name": "Trent",
+              "value": 950,
+              "created_at": "2021-07-21T11:13:44.019Z",
+              "updated_at": "2021-07-21T11:13:44.019Z"
+            },
+            {
+              "id": 754,
+              "name": "Gregory",
+              "value": 858,
+              "created_at": "2021-07-21T11:13:46.019Z",
+              "updated_at": "2021-07-21T11:13:44.021Z"
+            }
+          ]
+        }
+      ],
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "GET",
+      "path": "/api/v1/metrics/timeline",
+      "versions": [
+        "1.0"
+      ],
+      "query": "average_type=second",
+      "request_data": null,
+      "response_data": [
+        {
+          "date": "2021-07-21T11:13:44.000Z",
+          "average": 908.0,
+          "metrics": [
+            {
+              "id": 755,
+              "name": "Dominque",
+              "value": 908,
+              "created_at": "2021-07-21T11:13:44.037Z",
+              "updated_at": "2021-07-21T11:13:44.037Z"
+            }
+          ]
+        },
+        {
+          "date": "2021-07-21T11:13:46.000Z",
+          "average": 906.0,
+          "metrics": [
+            {
+              "id": 756,
+              "name": "Zoe",
+              "value": 906,
+              "created_at": "2021-07-21T11:13:46.037Z",
+              "updated_at": "2021-07-21T11:13:44.039Z"
+            }
+          ]
+        }
+      ],
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    }
+  ],
+  "metrics#update": [
+    {
+      "verb": "PUT",
+      "path": "/api/v1/metrics/739",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": {
+        "metric": {
+          "name": "Updated"
+        }
+      },
+      "response_data": {
+        "id": 739,
+        "name": "Updated",
+        "value": 59,
+        "created_at": "2021-07-21T11:13:43.898Z"
+      },
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "PUT",
+      "path": "/api/v1/metrics/test",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": {
+        "metric": {
+          "first_name": "test"
+        }
+      },
+      "response_data": {
+        "error": "Metric not found"
+      },
+      "code": 404,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "PUT",
+      "path": "/api/v1/metrics/743",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": {
+        "metric": {
+          "name": "Updated"
+        }
+      },
+      "response_data": {
+        "id": 743,
+        "name": "Updated",
+        "value": 921,
+        "created_at": "2021-07-21T11:13:43.933Z"
+      },
       "code": 200,
       "show_in_doc": 1,
       "recorded": true

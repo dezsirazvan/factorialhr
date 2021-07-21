@@ -54,5 +54,8 @@ class Api::V1::ContactsController < ApplicationController
 
     def find_contact
       @contact = Contact.find(params[:id])
+    rescue StandardError
+      render json: { error: 'Contact not found' }, status: :not_found
+      nil
     end
 end

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Api::V1::MetricsController < ApplicationController
+  include Api::V1::MetricsControllerDoc
+
   before_action :find_metric, except: [:index, :create, :timeline]
 
   def index
@@ -60,6 +62,9 @@ class Api::V1::MetricsController < ApplicationController
 
     def find_metric
       @metric = Metric.find(params[:id])
+    rescue StandardError
+      render json: { error: 'Metric not found' }, status: :not_found
+      nil
     end
 
     def metrics_in_interval
