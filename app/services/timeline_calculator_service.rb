@@ -12,7 +12,7 @@ class TimelineCalculatorService
 
     @metrics_grouped.each do |key, value|
       values = values_array(value)
-      average = AverageValuesCalculatorService.new(values).calculate
+      average = average_value(values)
 
       final_result << result_object(key, average, value)
     end
@@ -23,15 +23,24 @@ class TimelineCalculatorService
     []
   end
 
-  def result_object(key, average, value)
-    {
-      date: key,
-      average: average,
-      metrics: value
-    }
-  end
+  private
 
-  def values_array(value)
-    value.pluck(:value)
-  end
+    def average_value(values)
+      values.inject { |sum, el| sum + el }.to_f / values.size
+    rescue StandarError => error
+      Rails.logger(error)
+      nil
+    end
+
+    def result_object(key, average, value)
+      {
+        date: key,
+        average: average,
+        metrics: value
+      }
+    end
+
+    def values_array(value)
+      value.pluck(:value)
+    end
 end

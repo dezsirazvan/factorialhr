@@ -24,15 +24,17 @@ class GroupMetricsService
     nil
   end
 
-  def group_by_day
-    @metrics.group_by_day(&:created_at)
-  end
+  private
 
-  def group_by_minute
-    @metrics.group_by_minute(&:created_at)
-  end
+    def group_by_day
+      @metrics.group_by_day(&:created_at)
+    end
 
-  def group_by_second
-    @metrics.group_by_second(&:created_at)
-  end
+    def group_by_minute
+      @metrics.group_by_minute(&:created_at)
+    end
+
+    def group_by_second
+      @metrics.group_by_second(&:created_at)
+    end
 end
