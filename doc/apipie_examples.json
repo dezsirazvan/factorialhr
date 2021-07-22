@@ -16,14 +16,14 @@
         }
       },
       "response_data": {
-        "id": 611,
+        "id": 1043,
         "first_name": "Test",
         "last_name": "Test Last Name",
         "email": "test@test.com",
         "phone_number": "+34567789123",
-        "created_at": "2021-07-21T11:13:43.458Z"
+        "created_at": "2021-07-22T12:49:48.277Z"
       },
-      "code": 200,
+      "code": 201,
       "show_in_doc": 1,
       "recorded": true
     },
@@ -40,7 +40,8 @@
         }
       },
       "response_data": {
-        "errors": {
+        "error": "Unprocessable entity",
+        "message": {
           "phone_number": [
             "can't be blank"
           ],
@@ -72,14 +73,14 @@
         }
       },
       "response_data": {
-        "id": 616,
+        "id": 1048,
         "first_name": "Test",
         "last_name": "Test Last Name",
         "email": "test@test.com",
         "phone_number": "+34567789123",
-        "created_at": "2021-07-21T11:13:43.511Z"
+        "created_at": "2021-07-22T12:49:48.342Z"
       },
-      "code": 200,
+      "code": 201,
       "show_in_doc": 1,
       "recorded": true
     }
@@ -87,7 +88,7 @@
   "contacts#destroy": [
     {
       "verb": "DELETE",
-      "path": "/api/v1/contacts/623",
+      "path": "/api/v1/contacts/1055",
       "versions": [
         "1.0"
       ],
@@ -109,7 +110,8 @@
       "query": null,
       "request_data": null,
       "response_data": {
-        "error": "Contact not found"
+        "error": "Record not found",
+        "message": "Couldn't find Contact with 'id'=test"
       },
       "code": 404,
       "show_in_doc": 1,
@@ -117,7 +119,7 @@
     },
     {
       "verb": "DELETE",
-      "path": "/api/v1/contacts/627",
+      "path": "/api/v1/contacts/1059",
       "versions": [
         "1.0"
       ],
@@ -142,20 +144,20 @@
       "request_data": null,
       "response_data": [
         {
-          "id": 605,
-          "first_name": "Arthur",
-          "last_name": "Wuckert",
-          "email": "rubin@herman.co",
-          "phone_number": "+348662237425",
-          "created_at": "2021-07-21T11:13:43.378Z"
+          "id": 1037,
+          "first_name": "Hoyt",
+          "last_name": "Ruecker",
+          "email": "walkerwilkinson@casper.info",
+          "phone_number": "+349741910168",
+          "created_at": "2021-07-22T12:49:48.199Z"
         },
         {
-          "id": 606,
-          "first_name": "Virgil",
-          "last_name": "Barrows",
-          "email": "elmochamplin@bode.net",
-          "phone_number": "+349827492773",
-          "created_at": "2021-07-21T11:13:43.387Z"
+          "id": 1038,
+          "first_name": "Isidro",
+          "last_name": "Bins",
+          "email": "shadyundt@metz.net",
+          "phone_number": "+344306142459",
+          "created_at": "2021-07-22T12:49:48.206Z"
         }
       ],
       "code": 200,
@@ -172,20 +174,20 @@
       "request_data": null,
       "response_data": [
         {
-          "id": 607,
-          "first_name": "Joseph",
-          "last_name": "Morar",
-          "email": "roxanegrady@hintzjenkins.co",
-          "phone_number": "+345711993293",
-          "created_at": "2021-07-21T11:13:43.411Z"
+          "id": 1039,
+          "first_name": "Rickie",
+          "last_name": "Douglas",
+          "email": "christalsauer@dicki.info",
+          "phone_number": "+346389616913",
+          "created_at": "2021-07-22T12:49:48.227Z"
         },
         {
-          "id": 608,
-          "first_name": "Hung",
-          "last_name": "Lockman",
-          "email": "stanford@gleasonkilback.io",
-          "phone_number": "+345835834025",
-          "created_at": "2021-07-21T11:13:43.416Z"
+          "id": 1040,
+          "first_name": "Thea",
+          "last_name": "Grimes",
+          "email": "erwindickinson@streich.net",
+          "phone_number": "+343805644745",
+          "created_at": "2021-07-22T12:49:48.234Z"
         }
       ],
       "code": 200,
@@ -196,19 +198,19 @@
   "contacts#show": [
     {
       "verb": "GET",
-      "path": "/api/v1/contacts/599",
+      "path": "/api/v1/contacts/1031",
       "versions": [
         "1.0"
       ],
       "query": null,
       "request_data": null,
       "response_data": {
-        "id": 599,
-        "first_name": "Ranae",
-        "last_name": "Prosacco",
-        "email": "bill@beier.name",
-        "phone_number": "+349512839180",
-        "created_at": "2021-07-21T11:13:43.225Z"
+        "id": 1031,
+        "first_name": "Lauren",
+        "last_name": "Koelpin",
+        "email": "aidalind@gottlieb.biz",
+        "phone_number": "+344033303994",
+        "created_at": "2021-07-22T12:49:48.040Z"
       },
       "code": 200,
       "show_in_doc": 1,
@@ -223,7 +225,8 @@
       "query": null,
       "request_data": null,
       "response_data": {
-        "error": "Contact not found"
+        "error": "Record not found",
+        "message": "Couldn't find Contact with 'id'=test"
       },
       "code": 404,
       "show_in_doc": 1,
@@ -231,19 +234,19 @@
     },
     {
       "verb": "GET",
-      "path": "/api/v1/contacts/603",
+      "path": "/api/v1/contacts/1035",
       "versions": [
         "1.0"
       ],
       "query": null,
       "request_data": null,
       "response_data": {
-        "id": 603,
-        "first_name": "Jeromy",
-        "last_name": "Ernser",
-        "email": "amoslehner@crist.org",
-        "phone_number": "+347979334212",
-        "created_at": "2021-07-21T11:13:43.346Z"
+        "id": 1035,
+        "first_name": "Quinn",
+        "last_name": "Herman",
+        "email": "abrahamzulauf@lueilwitz.name",
+        "phone_number": "+345311226348",
+        "created_at": "2021-07-22T12:49:48.168Z"
       },
       "code": 200,
       "show_in_doc": 1,
@@ -253,7 +256,7 @@
   "contacts#update": [
     {
       "verb": "PUT",
-      "path": "/api/v1/contacts/617",
+      "path": "/api/v1/contacts/1049",
       "versions": [
         "1.0"
       ],
@@ -264,12 +267,12 @@
         }
       },
       "response_data": {
-        "id": 617,
+        "id": 1049,
         "first_name": "Updated",
-        "last_name": "Trantow",
-        "email": "renae@millskerluke.co",
-        "phone_number": "+341823019482",
-        "created_at": "2021-07-21T11:13:43.519Z"
+        "last_name": "Kulas",
+        "email": "shirleypollich@prohaskalehner.info",
+        "phone_number": "+346950330322",
+        "created_at": "2021-07-22T12:49:48.350Z"
       },
       "code": 200,
       "show_in_doc": 1,
@@ -288,7 +291,8 @@
         }
       },
       "response_data": {
-        "error": "Contact not found"
+        "error": "Record not found",
+        "message": "Couldn't find Contact with 'id'=test"
       },
       "code": 404,
       "show_in_doc": 1,
@@ -296,7 +300,7 @@
     },
     {
       "verb": "PUT",
-      "path": "/api/v1/contacts/621",
+      "path": "/api/v1/contacts/1053",
       "versions": [
         "1.0"
       ],
@@ -307,12 +311,12 @@
         }
       },
       "response_data": {
-        "id": 621,
+        "id": 1053,
         "first_name": "Updated",
-        "last_name": "Franecki",
-        "email": "benitoschultz@farrellgutmann.name",
-        "phone_number": "+341514780127",
-        "created_at": "2021-07-21T11:13:43.569Z"
+        "last_name": "Gibson",
+        "email": "victorina@kunzedickinson.biz",
+        "phone_number": "+345006043456",
+        "created_at": "2021-07-22T12:49:48.410Z"
       },
       "code": 200,
       "show_in_doc": 1,
@@ -322,7 +326,7 @@
   "contacts#versions": [
     {
       "verb": "GET",
-      "path": "/api/v1/contacts/629/versions",
+      "path": "/api/v1/contacts/1061/versions",
       "versions": [
         "1.0"
       ],
@@ -333,35 +337,34 @@
           {
             "id": [
               null,
-              629
+              1061
             ],
             "first_name": [
               null,
-              "Brenton"
+              "Kathy"
             ],
             "last_name": [
               null,
-              "Greenfelder"
+              "Von"
             ],
             "email": [
               null,
-              "shadbins@rippin.name"
+              "lacreshaabbott@dach.co"
             ],
             "phone_number": [
               null,
-              "+349165934836"
+              "+348353123690"
             ],
             "created_at": [
               null,
-              "2021-07-21T11:13:43.671Z"
+              "2021-07-22T12:49:48.532Z"
             ],
             "updated_at": [
               null,
-              "2021-07-21T11:13:43.671Z"
+              "2021-07-22T12:49:48.532Z"
             ]
           }
         ],
-        "status": "ok",
         "message": "Success"
       },
       "code": 200,
@@ -377,7 +380,8 @@
       "query": null,
       "request_data": null,
       "response_data": {
-        "error": "Contact not found"
+        "error": "Record not found",
+        "message": "Couldn't find Contact with 'id'=test"
       },
       "code": 404,
       "show_in_doc": 1,
@@ -385,7 +389,7 @@
     },
     {
       "verb": "GET",
-      "path": "/api/v1/contacts/633/versions",
+      "path": "/api/v1/contacts/1065/versions",
       "versions": [
         "1.0"
       ],
@@ -396,45 +400,44 @@
           {
             "id": [
               null,
-              633
+              1065
             ],
             "first_name": [
               null,
-              "Dirk"
+              "Oscar"
             ],
             "last_name": [
               null,
-              "Robel"
+              "Bechtelar"
             ],
             "email": [
               null,
-              "enedina@walker.biz"
+              "sterlingsenger@gislason.org"
             ],
             "phone_number": [
               null,
-              "+345769720973"
+              "+341619993929"
             ],
             "created_at": [
               null,
-              "2021-07-21T11:13:43.720Z"
+              "2021-07-22T12:49:48.593Z"
             ],
             "updated_at": [
               null,
-              "2021-07-21T11:13:43.720Z"
+              "2021-07-22T12:49:48.593Z"
             ]
           },
           {
             "first_name": [
-              "Dirk",
+              "Oscar",
               "Test Updated"
             ],
             "updated_at": [
-              "2021-07-21T11:13:43.720Z",
-              "2021-07-21T11:13:43.730Z"
+              "2021-07-22T12:49:48.593Z",
+              "2021-07-22T12:49:48.604Z"
             ]
           }
         ],
-        "status": "ok",
         "message": "Success"
       },
       "code": 200,
@@ -457,12 +460,12 @@
         }
       },
       "response_data": {
-        "id": 733,
+        "id": 1177,
         "name": "Test",
         "value": 10,
-        "created_at": "2021-07-21T11:13:43.859Z"
+        "created_at": "2021-07-22T12:49:48.751Z"
       },
-      "code": 200,
+      "code": 201,
       "show_in_doc": 1,
       "recorded": true
     },
@@ -479,7 +482,8 @@
         }
       },
       "response_data": {
-        "errors": {
+        "error": "Unprocessable entity",
+        "message": {
           "name": [
             "can't be blank"
           ],
@@ -507,12 +511,12 @@
         }
       },
       "response_data": {
-        "id": 738,
+        "id": 1182,
         "name": "Test",
         "value": 10,
-        "created_at": "2021-07-21T11:13:43.894Z"
+        "created_at": "2021-07-22T12:49:48.787Z"
       },
-      "code": 200,
+      "code": 201,
       "show_in_doc": 1,
       "recorded": true
     }
@@ -520,7 +524,7 @@
   "metrics#destroy": [
     {
       "verb": "DELETE",
-      "path": "/api/v1/metrics/745",
+      "path": "/api/v1/metrics/1189",
       "versions": [
         "1.0"
       ],
@@ -542,7 +546,8 @@
       "query": null,
       "request_data": null,
       "response_data": {
-        "error": "Metric not found"
+        "error": "Record not found",
+        "message": "Couldn't find Metric with 'id'=test"
       },
       "code": 404,
       "show_in_doc": 1,
@@ -550,7 +555,7 @@
     },
     {
       "verb": "DELETE",
-      "path": "/api/v1/metrics/749",
+      "path": "/api/v1/metrics/1193",
       "versions": [
         "1.0"
       ],
@@ -575,16 +580,16 @@
       "request_data": null,
       "response_data": [
         {
-          "id": 727,
-          "name": "Kesha",
-          "value": 611,
-          "created_at": "2021-07-21T11:13:43.806Z"
+          "id": 1171,
+          "name": "Flo",
+          "value": 104,
+          "created_at": "2021-07-22T12:49:48.695Z"
         },
         {
-          "id": 728,
-          "name": "Travis",
-          "value": 143,
-          "created_at": "2021-07-21T11:13:45.806Z"
+          "id": 1172,
+          "name": "Tynisha",
+          "value": 813,
+          "created_at": "2021-07-22T12:51:48.695Z"
         }
       ],
       "code": 200,
@@ -601,16 +606,16 @@
       "request_data": null,
       "response_data": [
         {
-          "id": 729,
-          "name": "Malia",
-          "value": 868,
-          "created_at": "2021-07-21T11:13:43.823Z"
+          "id": 1173,
+          "name": "Deangelo",
+          "value": 384,
+          "created_at": "2021-07-22T12:49:48.715Z"
         },
         {
-          "id": 730,
-          "name": "Charley",
-          "value": 979,
-          "created_at": "2021-07-21T11:13:45.823Z"
+          "id": 1174,
+          "name": "Frederick",
+          "value": 82,
+          "created_at": "2021-07-22T12:51:48.715Z"
         }
       ],
       "code": 200,
@@ -621,17 +626,17 @@
   "metrics#show": [
     {
       "verb": "GET",
-      "path": "/api/v1/metrics/721",
+      "path": "/api/v1/metrics/1165",
       "versions": [
         "1.0"
       ],
       "query": null,
       "request_data": null,
       "response_data": {
-        "id": 721,
-        "name": "Lashanda",
-        "value": 265,
-        "created_at": "2021-07-21T11:13:43.754Z"
+        "id": 1165,
+        "name": "Roger",
+        "value": 667,
+        "created_at": "2021-07-22T12:49:48.633Z"
       },
       "code": 200,
       "show_in_doc": 1,
@@ -646,7 +651,8 @@
       "query": null,
       "request_data": null,
       "response_data": {
-        "error": "Metric not found"
+        "error": "Record not found",
+        "message": "Couldn't find Metric with 'id'=test"
       },
       "code": 404,
       "show_in_doc": 1,
@@ -654,17 +660,17 @@
     },
     {
       "verb": "GET",
-      "path": "/api/v1/metrics/725",
+      "path": "/api/v1/metrics/1169",
       "versions": [
         "1.0"
       ],
       "query": null,
       "request_data": null,
       "response_data": {
-        "id": 725,
-        "name": "Elwood",
-        "value": 955,
-        "created_at": "2021-07-21T11:13:43.790Z"
+        "id": 1169,
+        "name": "Deirdre",
+        "value": 190,
+        "created_at": "2021-07-22T12:49:48.676Z"
       },
       "code": 200,
       "show_in_doc": 1,
@@ -682,22 +688,22 @@
       "request_data": null,
       "response_data": [
         {
-          "date": "2021-07-21",
-          "average": 117.5,
+          "date": "2021-07-22",
+          "average": 431.5,
           "metrics": [
             {
-              "id": 751,
-              "name": "Vaughn",
-              "value": 81,
-              "created_at": "2021-07-21T11:13:44.000Z",
-              "updated_at": "2021-07-21T11:13:44.000Z"
+              "id": 1195,
+              "name": "Lurlene",
+              "value": 703,
+              "created_at": "2021-07-22T12:49:48.894Z",
+              "updated_at": "2021-07-22T12:49:48.894Z"
             },
             {
-              "id": 752,
-              "name": "Jude",
-              "value": 154,
-              "created_at": "2021-07-21T11:13:46.000Z",
-              "updated_at": "2021-07-21T11:13:44.002Z"
+              "id": 1196,
+              "name": "Ulysses",
+              "value": 160,
+              "created_at": "2021-07-22T12:51:48.894Z",
+              "updated_at": "2021-07-22T12:49:48.896Z"
             }
           ]
         }
@@ -716,22 +722,22 @@
       "request_data": null,
       "response_data": [
         {
-          "date": "2021-07-21",
-          "average": 904.0,
+          "date": "2021-07-22",
+          "average": 469.5,
           "metrics": [
             {
-              "id": 753,
-              "name": "Trent",
-              "value": 950,
-              "created_at": "2021-07-21T11:13:44.019Z",
-              "updated_at": "2021-07-21T11:13:44.019Z"
+              "id": 1197,
+              "name": "Tyrone",
+              "value": 473,
+              "created_at": "2021-07-22T12:49:48.915Z",
+              "updated_at": "2021-07-22T12:49:48.915Z"
             },
             {
-              "id": 754,
-              "name": "Gregory",
-              "value": 858,
-              "created_at": "2021-07-21T11:13:46.019Z",
-              "updated_at": "2021-07-21T11:13:44.021Z"
+              "id": 1198,
+              "name": "Ivory",
+              "value": 466,
+              "created_at": "2021-07-22T12:51:48.915Z",
+              "updated_at": "2021-07-22T12:49:48.917Z"
             }
           ]
         }
@@ -746,32 +752,32 @@
       "versions": [
         "1.0"
       ],
-      "query": "average_type=second",
+      "query": "average_type=minute",
       "request_data": null,
       "response_data": [
         {
-          "date": "2021-07-21T11:13:44.000Z",
-          "average": 908.0,
+          "date": "2021-07-22T12:49:00.000Z",
+          "average": 432.0,
           "metrics": [
             {
-              "id": 755,
-              "name": "Dominque",
-              "value": 908,
-              "created_at": "2021-07-21T11:13:44.037Z",
-              "updated_at": "2021-07-21T11:13:44.037Z"
+              "id": 1199,
+              "name": "Lesley",
+              "value": 432,
+              "created_at": "2021-07-22T12:49:48.935Z",
+              "updated_at": "2021-07-22T12:49:48.935Z"
             }
           ]
         },
         {
-          "date": "2021-07-21T11:13:46.000Z",
-          "average": 906.0,
+          "date": "2021-07-22T12:51:00.000Z",
+          "average": 936.0,
           "metrics": [
             {
-              "id": 756,
-              "name": "Zoe",
-              "value": 906,
-              "created_at": "2021-07-21T11:13:46.037Z",
-              "updated_at": "2021-07-21T11:13:44.039Z"
+              "id": 1200,
+              "name": "Adriene",
+              "value": 936,
+              "created_at": "2021-07-22T12:51:48.935Z",
+              "updated_at": "2021-07-22T12:49:48.937Z"
             }
           ]
         }
@@ -784,7 +790,7 @@
   "metrics#update": [
     {
       "verb": "PUT",
-      "path": "/api/v1/metrics/739",
+      "path": "/api/v1/metrics/1183",
       "versions": [
         "1.0"
       ],
@@ -795,10 +801,10 @@
         }
       },
       "response_data": {
-        "id": 739,
+        "id": 1183,
         "name": "Updated",
-        "value": 59,
-        "created_at": "2021-07-21T11:13:43.898Z"
+        "value": 939,
+        "created_at": "2021-07-22T12:49:48.792Z"
       },
       "code": 200,
       "show_in_doc": 1,
@@ -817,7 +823,8 @@
         }
       },
       "response_data": {
-        "error": "Metric not found"
+        "error": "Record not found",
+        "message": "Couldn't find Metric with 'id'=test"
       },
       "code": 404,
       "show_in_doc": 1,
@@ -825,7 +832,7 @@
     },
     {
       "verb": "PUT",
-      "path": "/api/v1/metrics/743",
+      "path": "/api/v1/metrics/1187",
       "versions": [
         "1.0"
       ],
@@ -836,10 +843,10 @@
         }
       },
       "response_data": {
-        "id": 743,
+        "id": 1187,
         "name": "Updated",
-        "value": 921,
-        "created_at": "2021-07-21T11:13:43.933Z"
+        "value": 412,
+        "created_at": "2021-07-22T12:49:48.827Z"
       },
       "code": 200,
       "show_in_doc": 1,

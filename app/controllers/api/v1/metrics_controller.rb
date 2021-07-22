@@ -8,50 +8,39 @@ class Api::V1::MetricsController < ApplicationController
   def index
     @metrics = Metric.all
 
-    @metrics = metrics_in_interval if params[:from_date] && params[:to_date]
-
-    render json: @metrics, each_serializer: Metric::ListSerializer
+    render json: @metrics, each_serializer: Metric::ObjectSerializer, status: :ok
   end
 
   def create
     @metric = Metric.new(metric_params)
-    if @metric.save
-      render json: @metric, serializer: Metric::ObjectSerializer
-    else
-      render json: { errors: @metric.errors }, status: :unprocessable_entity
-    end
+
+    @metric.save!
+
+    render json: @metric, serializer: Metric::ObjectSerializer, status: :created
   end
 
   def show
-    render json: @metric, serializer: Metric::ObjectSerializer
+    render json: @metric, serializer: Metric::ObjectSerializer, status: :ok
   end
 
   def update
-    if @metric.update(metric_params)
-      render json: @metric, serializer: Metric::ObjectSerializer
-    else
-      render json: { errors: @metric.errors }, status: :unprocessable_entity
-    end
+    @metric.update!(metric_params)
+
+    render json: @metric, serializer: Metric::ObjectSerializer, status: :ok
   end
 
   def destroy
-    if @metric.destroy
-      render json: { message: 'Metric was successfully deleted.' }
-    else
-      render json: { errors: @metric.errors, status: :unprocessable_entity }
-    end
+    @metric.destroy!
+
+    render json: { message: 'Metric was successfully deleted.' }, status: :ok
   end
 
   def timeline
     @metrics = Metric.all
 
-    @metrics = metrics_in_interval if params[:from_date] && params[:to_date]
+    result = TimelineCalculatorService.new.calculate(@metrics, params[:average_type])
 
-    @metrics = GroupMetricsService.new(@metrics, params[:average_type]).group
-
-    result = TimelineCalculatorService.new(@metrics).calculate
-
-    render json: result
+    render json: result, status: :ok
   end
 
   private
@@ -62,15 +51,5 @@ class Api::V1::MetricsController < ApplicationController
 
     def find_metric
       @metric = Metric.find(params[:id])
-    rescue StandardError
-      render json: { error: 'Metric not found' }, status: :not_found
-      nil
-    end
-
-    def metrics_in_interval
-      @metrics.in_interval(params[:from_date], params[:to_date])
-    rescue ArgumentError => error
-      Rails.logger(error)
-      []
     end
 end

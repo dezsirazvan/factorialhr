@@ -2,8 +2,6 @@ module Api::V1::MetricsControllerDoc
   extend Apipie::DSL::Concern
 
   api :GET, '/metrics', 'Get all the metrics'
-  param :from_date, String, optional: true
-  param :to_date, String, optional: true
   def index
   end
 
@@ -35,8 +33,6 @@ module Api::V1::MetricsControllerDoc
   end
 
   api :GET, '/metrics/timeline', 'Get metrics timeline and average values'
-  param :from_date, String, optional: true
-  param :to_date, String, optional: true
   param :average_type, String, optional: true
   def timeline
   end

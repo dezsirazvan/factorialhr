@@ -9,7 +9,6 @@
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on }">
               <v-btn color="primary" dark class="mb-1 mr-2" v-on="on">New Metric</v-btn>
-              <date-picker v-model="selectedTime" class="mr-5" valueType="format" range></date-picker>
             </template>
             <v-card>
               <v-card-title>
@@ -47,7 +46,7 @@
       </template>
     </v-data-table>
     <h1 class="mt-5 ml-12"> Timeline </h1>
-    <v-select class="mt-5" :items="averageTypes" v-model="averageType" label="Day/Minute/Second Timeline"></v-select>
+    <v-select class="mt-5" :items="averageTypes" v-model="averageType" label="Day/Hour/Minute Timeline"></v-select>
     <timeline class="mt-5" v-for="(item, i) in timelines" :key="i">
       <timeline-title> Average per {{averageType}} in {{ item.date }} is: {{ item.average }}</timeline-title>
       <v-list-item v-for="(item, i) in item.metrics" :key="i">
@@ -59,21 +58,17 @@
 
 <script>
   import axios from "axios";
-  import DatePicker from 'vue2-datepicker';
-  import 'vue2-datepicker/index.css';
   import { Timeline, TimelineItem, TimelineTitle } from 'vue-cute-timeline'
   export default {
     components: { 
-      DatePicker, 
       Timeline,
       TimelineItem,
       TimelineTitle 
     },
     data: () => ({
       timelines: [],
-      averageTypes: ['day', 'minute', 'second'],
+      averageTypes: ['day', 'hour', 'minute'],
       averageType: 'day',
-      selectedTime: null,
       dialog: false,
       baseUrl: "http://localhost:3000/api/v1",
       headers: [
@@ -109,9 +104,6 @@
       dialog(val) {
         val || this.close();
       },
-      selectedTime(val) {
-        this.initialize(val[0], val[1])
-      },
       averageType(val) {
         this.getTimeline()
       }
@@ -124,8 +116,7 @@
     methods: {
       initialize(fromDate, toDate) {
         return axios
-          .get(`${this.baseUrl}/metrics`,
-          { params: { from_date: fromDate, to_date: toDate } })
+          .get(`${this.baseUrl}/metrics`)
           .then(response => {
             console.log(response.data);
             this.metrics = response.data;
@@ -211,16 +202,8 @@
       },
 
       getTimeline() {
-        var fromDate = null;
-        var toDate = null;
-        
-        if (this.selectedTime !== null){
-          fromDate = this.selectedTime[0],
-          toDate = this.selectedTime[1]
-        }
-
         axios
-          .get(`${this.baseUrl}/metrics/timeline`, { params: { from_date: fromDate, to_date: toDate, average_type: this.averageType } })
+          .get(`${this.baseUrl}/metrics/timeline`, { params: { average_type: this.averageType } })
           .then(response => {
             this.timelines = response.data;
           })

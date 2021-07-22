@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::MetricsController, type: :request do
   let(:json_response) { JSON.parse(response.body) }
   let!(:metric1) { create(:metric) }
-  let!(:metric2) { create(:metric, created_at: metric1.created_at + 2.second) }
+  let!(:metric2) { create(:metric, created_at: metric1.created_at + 2.minute) }
   let(:headers) do
     {
       'Content-Type' => 'application/json'
@@ -60,7 +60,7 @@ RSpec.describe Api::V1::MetricsController, type: :request do
       it 'returns status code 200', :show_in_doc do
         post "/api/v1/metrics", params: metric_params.to_json, headers: headers
 
-        expect(response).to have_http_status(:ok)
+        expect(response).to have_http_status(:created)
       end
 
       it 'returns status code 422', :show_in_doc do
@@ -137,8 +137,8 @@ RSpec.describe Api::V1::MetricsController, type: :request do
         expect(json_response.first["average"]).to eq(Metric.all.average(:value))
       end
 
-      it 'returns the correct version average value for second average type', :show_in_doc do
-        get "/api/v1/metrics/timeline?average_type=second"
+      it 'returns the correct version average value for minute average type', :show_in_doc do
+        get "/api/v1/metrics/timeline?average_type=minute"
         
         expect(json_response.count).to eq(2)
         expect(json_response.first["average"]).to eq(metric1.value)

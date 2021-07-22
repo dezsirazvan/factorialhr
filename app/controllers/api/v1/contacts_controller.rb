@@ -8,42 +8,36 @@ class Api::V1::ContactsController < ApplicationController
   def index
     @contacts = Contact.all
 
-    render json: @contacts, each_serializer: Contact::ListSerializer
+    render json: @contacts, each_serializer: Contact::ObjectSerializer, status: :ok
   end
 
   def create
     @contact = Contact.new(contact_params)
-    if @contact.save
-      render json: @contact, serializer: Contact::ObjectSerializer
-    else
-      render json: { errors: @contact.errors }, status: :unprocessable_entity
-    end
+    @contact.save!
+
+    render json: @contact, serializer: Contact::ObjectSerializer, status: :created
   end
 
   def show
-    render json: @contact, serializer: Contact::ObjectSerializer
+    render json: @contact, serializer: Contact::ObjectSerializer, status: :ok
   end
 
   def update
-    if @contact.update(contact_params)
-      render json: @contact, serializer: Contact::ObjectSerializer
-    else
-      render json: { errors: @contact.error, status: :unprocessable_entity }
-    end
+    @contact.update!(contact_params)
+
+    render json: @contact, serializer: Contact::ObjectSerializer, status: :ok
   end
 
   def destroy
-    if @contact.destroy
-      render json: { message: 'Contact was successfully deleted.' }
-    else
-      render json: { errors: @contact.errors, status: :unprocessable_entity }
-    end
+    @contact.destroy!
+
+    render json: { message: 'Contact was successfully deleted.' }, status: :ok
   end
 
   def versions
     versions = @contact.versions.map(&:changeset)
 
-    render json: { data: versions, status: :ok, message: 'Success' }
+    render json: { data: versions, message: 'Success' }, status: :ok
   end
 
   private
@@ -54,8 +48,5 @@ class Api::V1::ContactsController < ApplicationController
 
     def find_contact
       @contact = Contact.find(params[:id])
-    rescue StandardError
-      render json: { error: 'Contact not found' }, status: :not_found
-      nil
     end
 end

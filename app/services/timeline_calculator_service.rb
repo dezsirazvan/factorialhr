@@ -1,16 +1,14 @@
 # frozen_string_literal: true
 
 class TimelineCalculatorService
-  attr_reader :metrics_grouped
+  DEFAULT_AVERAGE_TYPE = 'day'
 
-  def initialize(metrics_grouped)
-    @metrics_grouped = metrics_grouped
-  end
-
-  def calculate
+  def calculate(metrics, average_type)
     final_result = []
 
-    @metrics_grouped.each do |key, value|
+    metrics = metrics_grouped(metrics, average_type)
+
+    metrics.each do |key, value|
       values = values_array(value)
       average = average_value(values)
 
@@ -18,19 +16,11 @@ class TimelineCalculatorService
     end
 
     final_result
-  rescue StandardError => error
-    Rails.logger(error)
+  rescue NoMethodError
     []
   end
 
   private
-
-    def average_value(values)
-      values.inject { |sum, el| sum + el }.to_f / values.size
-    rescue StandarError => error
-      Rails.logger(error)
-      nil
-    end
 
     def result_object(key, average, value)
       {
@@ -40,7 +30,19 @@ class TimelineCalculatorService
       }
     end
 
+    def metrics_grouped(metrics, average_type)
+      average_type = average_type.nil? ? DEFAULT_AVERAGE_TYPE : average_type
+
+      metrics.group_by_average_type(average_type.to_sym)
+    end
+
     def values_array(value)
       value.pluck(:value)
+    end
+
+    def average_value(values)
+      values.inject { |sum, el| sum + el }.to_f / values.size
+    rescue NoMethodError
+      nil
     end
 end

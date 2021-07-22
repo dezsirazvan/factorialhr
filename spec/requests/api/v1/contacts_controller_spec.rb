@@ -62,7 +62,7 @@ RSpec.describe Api::V1::ContactsController, type: :request do
       it 'returns status code 200', :show_in_doc do
         post "/api/v1/contacts", params: contact_params.to_json, headers: headers
 
-        expect(response).to have_http_status(:ok)
+        expect(response).to have_http_status(:created)
       end
 
       it 'returns status code 422', :show_in_doc do
