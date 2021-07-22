@@ -163,11 +163,9 @@ export default {
       return axios
         .get(`${this.baseUrl}/contacts`)
         .then(response => {
-          console.log(response.data);
           this.contacts = response.data;
         })
         .catch(e => {
-          console.log(e);
         });
     },
 
@@ -186,7 +184,6 @@ export default {
           this.initialize();
         })
         .catch(error => {
-          console.log(error);
         });
         this.contacts.splice(index, 1);
       }else{
@@ -222,14 +219,11 @@ export default {
             phone_number: this.editedItem.phone_number
           })
           .then(response => {
-            console.log(response);
             this.initialize();
           })
           .catch(error => {
-            console.log(error);
           });
       } else {
-        console.log(item);
         axios
           .post(`${this.baseUrl}/contacts/`, {
             contact: this.editedItem
@@ -239,7 +233,6 @@ export default {
             this.contacts.push(this.editedItem);
           })
           .catch(error => {
-            console.log(error);
           });
       }
       this.close();
@@ -254,7 +247,6 @@ export default {
             this.showDialog = true;
         })
         .catch(error => {
-          console.log(error);
         });
     },
     showChanges(item) {
@@ -265,7 +257,6 @@ export default {
            this.changesHistory = response.data.data;
         })
         .catch(error => {
-          console.log(error);
         });
     }
   }

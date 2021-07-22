@@ -134,7 +134,7 @@ RSpec.describe Api::V1::MetricsController, type: :request do
         get "/api/v1/metrics/timeline", {}
 
         expect(json_response.count).to eq(1)
-        expect(json_response.first["average"]).to eq(Metric.all.average(:value))
+        expect(json_response.first["average"]).to eq(Metric.all.average(:value) * 1440)
       end
 
       it 'returns the correct version average value for minute average type', :show_in_doc do

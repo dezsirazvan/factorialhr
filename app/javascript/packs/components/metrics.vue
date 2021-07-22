@@ -118,11 +118,9 @@
         return axios
           .get(`${this.baseUrl}/metrics`)
           .then(response => {
-            console.log(response.data);
             this.metrics = response.data;
           })
           .catch(e => {
-            console.log(e);
           });
       },
 
@@ -142,7 +140,6 @@
               this.initialize(null, null);
             })
             .catch(error => {
-              console.log(error);
             });
           this.metrics.splice(index, 1);
           } else {
@@ -167,14 +164,12 @@
               value: this.editedItem.value
             })
             .then(response => {
-              console.log(response);
               this.initialize(null, null);
             })
             .catch(error => {
               alert(error.message);
             });
         } else {
-          console.log(item);
           axios
             .post(`${this.baseUrl}/metrics/`, {
               metric: this.editedItem
@@ -197,7 +192,6 @@
             this.metric = response.data;
           })
           .catch(error => {
-            console.log(error);
           });
       },
 
@@ -208,7 +202,6 @@
             this.timelines = response.data;
           })
           .catch(error => {
-            console.log(error);
           });
       }
     }
